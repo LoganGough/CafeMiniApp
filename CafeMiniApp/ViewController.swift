@@ -16,6 +16,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var textView2: UITextView!
     
+    @IBOutlet weak var label: UILabel!
+    
+    var found = false
     
     @IBOutlet weak var textField2: UITextField!
     
@@ -24,7 +27,7 @@ class ViewController: UIViewController {
     var food: [String] = ["Eggs", "Milk", "Cereal", "Chicken", "Yogurt"]
     var prices: [Double] = [5.99, 7.99, 10.99, 14.99, 4.99]
     var cart: [String: Int] = [:]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,32 +43,48 @@ class ViewController: UIViewController {
     
     
     @IBAction func buttonCart(_ sender: UIButton) {
+        
         var item = textField1.text
         var blah = textField2.text!
         var quantity = Int(blah) ?? 0
-        switch item{
-        case "Eggs": cart["Eggs"] = quantity
-        case "Milk": cart["Milk"] = quantity
-        case "Cereal": cart["Cereal"] = quantity
-        case "Chicken": cart["Chicken"] = quantity
-        case "Yogurt": cart["Yogurt"] = quantity
-        case "eggs": cart["Eggs"] = quantity
-        case "milk": cart["Milk"] = quantity
-        case "cereal": cart["Cereal"] = quantity
-        case "chicken": cart["Chicken"] = quantity
-        case "yogurt": cart["Yogurt"] = quantity
-        default:print("blah")
+        for(key2, value2) in cart{
+            if(item == key2){
+                found = true
+            }
+//            else{
+//                found = false
+//            }
+        }
+        if(found == false){
+            print("didn't find")
+            switch item{
+            case "Eggs": cart["Eggs"] = quantity; label.text = ""
+            case "Milk": cart["Milk"] = quantity; label.text = ""
+            case "Cereal": cart["Cereal"] = quantity; label.text = ""
+            case "Chicken": cart["Chicken"] = quantity; label.text = ""
+            case "Yogurt": cart["Yogurt"] = quantity; label.text = ""
+            case "eggs": cart["Eggs"] = quantity; label.text = ""
+            case "milk": cart["Milk"] = quantity; label.text = ""
+            case "cereal": cart["Cereal"] = quantity; label.text = ""
+            case "chicken": cart["Chicken"] = quantity; label.text = ""
+            case "yogurt": cart["Yogurt"] = quantity; label.text = ""
+            default:label.text = "ERROR"
+                found = true
+            }
+        }
+            
+        
+            
+            var cartItems = ""
+            for(key, value) in cart{
+                cartItems = cartItems + "Item: \(key) \nQuantity: \(value)\n"
+                count = count + Double(value)
+            }
+            textView2.text = cartItems
+            
         }
         
-        var cartItems = ""
-        for(key, value) in cart{
-            cartItems = cartItems + "Item: \(key) \nQuantity: \(value)\n"
-            count = count + Double(value)
-        }
-        textView2.text = cartItems
         
     }
-    
 
-}
 
