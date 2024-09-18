@@ -48,8 +48,10 @@ class ViewController: UIViewController {
         var blah = textField2.text!
         var quantity = Int(blah) ?? 0
         for(key2, value2) in cart{
-            if(item == key2){
+            if(item?.lowercased() == key2.lowercased()){
                 found = true
+                print("found")
+                label.text = "ITEM FOUND"
             }
 //            else{
 //                found = false
@@ -69,7 +71,9 @@ class ViewController: UIViewController {
             case "chicken": cart["Chicken"] = quantity; label.text = ""
             case "yogurt": cart["Yogurt"] = quantity; label.text = ""
             default:label.text = "ERROR"
-                found = true
+                found = false
+                item = ""
+                
             }
         }
             
